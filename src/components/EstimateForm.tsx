@@ -79,23 +79,23 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
 
   if (status === "done") {
     return (
-      <div className="rounded-2xl border border-border bg-card p-8 shadow-[var(--shadow-panel)] sm:p-10">
-        <div className="flex size-12 items-center justify-center rounded-full bg-accent/15 text-accent">
-          <CheckCircle2 className="size-6" />
+      <div className="rounded-xl border border-border bg-card p-6">
+        <div className="flex size-9 items-center justify-center rounded-full bg-secondary text-foreground">
+          <CheckCircle2 className="size-5" />
         </div>
-        <h2 className="mt-6 font-display text-2xl font-semibold text-card-foreground">
+        <h2 className="mt-4 font-display text-lg font-semibold text-card-foreground">
           Request received
         </h2>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          Thanks{parsed(name)}. Your estimate request for{" "}
-          <span className="text-card-foreground">{projectType.toLowerCase()}</span> is in the
-          system, and an automated AI-generated reply from {companyName} is already on its way to{" "}
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          Thanks{parsed(name)}. Your request for{" "}
+          <span className="text-card-foreground">{projectType.toLowerCase()}</span> is in, and an
+          AI-written reply from {companyName} is on its way to{" "}
           <span className="text-card-foreground">{email}</span>.
         </p>
-        <div className="mt-8 space-y-3 border-t border-border pt-6">
-          <Step icon={<Zap className="size-4" />} label="Lead captured and routed instantly" />
-          <Step icon={<Sparkles className="size-4" />} label="AI drafts a tailored first response" />
-          <Step icon={<Mail className="size-4" />} label="Reply lands in the inbox in seconds" />
+        <div className="mt-6 space-y-2.5 border-t border-border pt-5">
+          <Step icon={<Zap className="size-3.5" />} label="Lead captured and routed instantly" />
+          <Step icon={<Sparkles className="size-3.5" />} label="AI drafts a tailored reply" />
+          <Step icon={<Mail className="size-3.5" />} label="Reply lands in the inbox in seconds" />
         </div>
       </div>
     );
@@ -104,18 +104,19 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-border bg-card p-6 shadow-[var(--shadow-panel)] sm:p-8"
+      className="rounded-xl border border-border bg-card p-6"
     >
-      <h2 className="font-display text-xl font-semibold text-card-foreground">
+      <h2 className="font-display text-base font-semibold text-card-foreground">
         Request your free estimate
       </h2>
-      <p className="mt-1.5 text-sm text-muted-foreground">
+      <p className="mt-1 text-sm text-muted-foreground">
         {contactKnown
-          ? `We already have your details — just tell ${companyName} about the project.`
-          : "Takes under a minute. You'll get a reply almost immediately."}
+          ? `Just tell ${companyName} about the project.`
+          : "Takes under a minute."}
       </p>
 
-      <div className="mt-6 space-y-5">
+
+      <div className="mt-5 space-y-4">
         {!contactKnown && (
           <>
             <Field label="Full name" error={errors["name"]}>
@@ -160,7 +161,7 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            rows={5}
+            rows={4}
             maxLength={2000}
             placeholder="Scope, rough timeline, budget range, anything else that helps…"
             className="form-control resize-y"
@@ -168,9 +169,10 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
         </Field>
       </div>
 
-      {submitError && <p className="mt-5 text-sm text-destructive">{submitError}</p>}
+      {submitError && <p className="mt-4 text-sm text-destructive">{submitError}</p>}
 
-      <button type="submit" disabled={status === "loading"} className="btn-primary mt-7 w-full">
+      <button type="submit" disabled={status === "loading"} className="btn-primary mt-6 w-full">
+
         {status === "loading" ? (
           <>
             <Loader2 className="size-4 animate-spin" />
