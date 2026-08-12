@@ -1,24 +1,47 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { EstimatePage } from "@/components/EstimatePage";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+type Search = {
+  name?: string | undefined;
+  email?: string | undefined;
+  company?: string | undefined;
+};
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  validateSearch: (search: Record<string, unknown>): Search => ({
+    name: typeof search["name"] === "string" ? search["name"].slice(0, 100) : undefined,
+    email: typeof search["email"] === "string" ? search["email"].slice(0, 255) : undefined,
+    company: typeof search["company"] === "string" ? search["company"].slice(0, 80) : undefined,
+  }),
+  head: () => ({
+    meta: [
+      { title: "Instant Estimate Requests for Remodelers | Lead Response Demo" },
+      {
+        name: "description",
+        content:
+          "Send a home remodeling estimate request and watch an AI-written reply go out in seconds. Live demo of an automated lead-response system.",
+      },
+      { property: "og:title", content: "Instant Estimate Requests for Remodelers" },
+      {
+        property: "og:description",
+        content:
+          "Request a remodeling estimate and see how an AI lead-response system replies in under a minute.",
+      },
+    ],
+  }),
+  component: Home,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Home() {
+  const { name, email, company } = Route.useSearch();
+  const trimmedCompany = company?.trim();
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <EstimatePage
+      companyName={trimmedCompany || "Your Company"}
+      isPlaceholderCompany={!trimmedCompany}
+      knownName={name?.trim() || undefined}
+      knownEmail={email?.trim() || undefined}
+    />
   );
 }
