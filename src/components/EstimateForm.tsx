@@ -116,7 +116,7 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
       </p>
 
 
-      <div className="mt-6 space-y-5">
+      <div className="mt-5 space-y-4">
         {!contactKnown && (
           <>
             <Field label="Full name" error={errors["name"]}>
@@ -158,6 +158,11 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
         </Field>
 
         <Field label="Tell us about your project" error={errors["description"]}>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={4}
+
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
