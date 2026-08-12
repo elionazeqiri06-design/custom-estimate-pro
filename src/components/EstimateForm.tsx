@@ -162,11 +162,6 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
-
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={5}
             maxLength={2000}
             placeholder="Scope, rough timeline, budget range, anything else that helps…"
             className="form-control resize-y"
@@ -174,9 +169,10 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
         </Field>
       </div>
 
-      {submitError && <p className="mt-5 text-sm text-destructive">{submitError}</p>}
+      {submitError && <p className="mt-4 text-sm text-destructive">{submitError}</p>}
 
-      <button type="submit" disabled={status === "loading"} className="btn-primary mt-7 w-full">
+      <button type="submit" disabled={status === "loading"} className="btn-primary mt-6 w-full">
+
         {status === "loading" ? (
           <>
             <Loader2 className="size-4 animate-spin" />
