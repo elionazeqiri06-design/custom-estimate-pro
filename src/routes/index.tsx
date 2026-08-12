@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EstimatePage } from "@/components/EstimatePage";
 
-type Search = { name?: string | undefined; email?: string | undefined; company?: string };
+type Search = {
+  name?: string | undefined;
+  email?: string | undefined;
+  company?: string | undefined;
+};
 
 export const Route = createFileRoute("/")({
   validateSearch: (search: Record<string, unknown>): Search => ({
