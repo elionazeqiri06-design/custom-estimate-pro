@@ -25,8 +25,8 @@ const schema = z.object({
 
 export type EstimateFormProps = {
   companyName: string;
-  knownName?: string;
-  knownEmail?: string;
+  knownName?: string | undefined;
+  knownEmail?: string | undefined;
 };
 
 export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFormProps) {
@@ -118,7 +118,7 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
       <div className="mt-6 space-y-5">
         {!contactKnown && (
           <>
-            <Field label="Full name" error={errors.name}>
+            <Field label="Full name" error={errors["name"]}>
               <input
                 type="text"
                 value={name}
@@ -128,7 +128,7 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
                 className="form-control"
               />
             </Field>
-            <Field label="Email" error={errors.email}>
+            <Field label="Email" error={errors["email"]}>
               <input
                 type="email"
                 value={email}
@@ -141,7 +141,7 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
           </>
         )}
 
-        <Field label="Project type" error={errors.project_type}>
+        <Field label="Project type" error={errors["project_type"]}>
           <select
             value={projectType}
             onChange={(e) => setProjectType(e.target.value)}
@@ -156,7 +156,7 @@ export function EstimateForm({ companyName, knownName, knownEmail }: EstimateFor
           </select>
         </Field>
 
-        <Field label="Tell us about your project" error={errors.description}>
+        <Field label="Tell us about your project" error={errors["description"]}>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -202,7 +202,7 @@ function Field({
   children,
 }: {
   label: string;
-  error?: string;
+  error?: string | undefined;
   children: React.ReactNode;
 }) {
   return (
