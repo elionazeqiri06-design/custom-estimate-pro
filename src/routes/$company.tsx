@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EstimatePage, slugToCompany } from "@/components/EstimatePage";
 
-type Search = { name?: string; email?: string };
+type Search = { name?: string | undefined; email?: string };
 
 export const Route = createFileRoute("/$company")({
   validateSearch: (search: Record<string, unknown>): Search => ({
-    name: typeof search.name === "string" ? search.name.slice(0, 100) : undefined,
-    email: typeof search.email === "string" ? search.email.slice(0, 255) : undefined,
+    name: typeof search["name"] === "string" ? search["name"].slice(0, 100) : undefined,
+    email: typeof search["email"] === "string" ? search["email"].slice(0, 255) : undefined,
   }),
   head: ({ params }) => {
     const company = slugToCompany(params.company) || "Your Company";
