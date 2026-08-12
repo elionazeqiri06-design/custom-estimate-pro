@@ -153,3 +153,54 @@
     color: var(--color-foreground);
   }
 }
+
+@layer components {
+  .form-control {
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-input);
+    background-color: var(--color-secondary);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+    color: var(--color-foreground);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+
+  .form-control::placeholder {
+    color: var(--color-muted-foreground);
+  }
+
+  .form-control:focus {
+    outline: none;
+    border-color: var(--color-ring);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-ring) 25%, transparent);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-md);
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+    padding: 0.8rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    transition: opacity 150ms ease, transform 150ms ease;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .btn-primary:active {
+    transform: translateY(1px);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
