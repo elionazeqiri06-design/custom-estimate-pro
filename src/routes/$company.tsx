@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { EstimatePage, slugToCompany } from "@/components/EstimatePage";
+import { LEADS } from "@/lib/leads";
 
 type Search = {
   name?: string | undefined;
@@ -12,7 +13,8 @@ export const Route = createFileRoute("/$company")({
     email: typeof search["email"] === "string" ? search["email"].slice(0, 255) : undefined,
   }),
   head: ({ params }) => {
-    const company = slugToCompany(params.company) || "Your Company";
+    const lead = LEADS[params.company];
+    const company = lead?.company || slugToCompany(params.company) || "Your Company";
     return {
       meta: [
         { title: `${company} — Request a Remodeling Estimate` },
@@ -34,14 +36,18 @@ export const Route = createFileRoute("/$company")({
 function CompanyPage() {
   const { company } = Route.useParams();
   const { name, email } = Route.useSearch();
-  const companyName = slugToCompany(company) || "Your Company";
+  const lead = LEADS[company];
+
+  const companyName = lead?.company || slugToCompany(company) || "Your Company";
+  const knownName = name?.trim() || lead?.name || undefined;
+  const knownEmail = email?.trim() || lead?.email || undefined;
 
   return (
     <EstimatePage
       companyName={companyName}
-      isPlaceholderCompany={!slugToCompany(company)}
-      knownName={name?.trim() || undefined}
-      knownEmail={email?.trim() || undefined}
+      isPlaceholderCompany={!lead && !slugToCompany(company)}
+      knownName={knownName}
+      knownEmail={knownEmail}
     />
   );
 }
