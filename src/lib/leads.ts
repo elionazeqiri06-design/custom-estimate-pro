@@ -806,4 +806,5 @@ export const LEADS: Record<string, LeadProfile> = {
   "emergent-construction": { company: "Emergent Construction", name: "", email: "matt@emergent-group.com" },
   "ap-advanced-construction": { company: "AP Advanced Construction", name: "", email: "heyaw@apadvanced.com" },
   "home-renovations-jax-llc": { company: "HOME RENOVATIONS JAX LLC", name: "", email: "sundar@google.com" },
+  "k-d-development": { company: "K&D Development", name: "Kurtis Reeme", email: "kurtis@kddevelop.com" },
 };
