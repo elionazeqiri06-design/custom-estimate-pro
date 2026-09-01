@@ -2,7 +2,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { ArrowRight, CheckCircle2, Loader2, Mail, Sparkles, Zap } from "lucide-react";
 
-const WEBHOOK_URL = "https://n8n.piplineloop.com/webhook/demo-estimate";
+const WEBHOOK_URL = "https://hook.eu2.make.com/4pkx1rdkfwtnn26q5akdu2znr7cgd33o";
 
 const PROJECT_TYPES = [
   "Kitchen Remodel",
